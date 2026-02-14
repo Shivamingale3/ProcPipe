@@ -1,0 +1,19 @@
+# procwatch configuration
+# Copy this file to ~/.procwatch.yaml
+
+telegram:
+  # Create a bot via @BotFather on Telegram, paste the token here
+  bot_token: "YOUR_BOT_TOKEN_HERE"
+
+  # Get your chat ID from @userinfobot on Telegram
+  chat_id: 0
+
+monitor:
+  # Number of output lines to include in completion notification
+  log_tail_lines: 50
+
+  # Additional regex patterns to detect input prompts
+  # Built-in patterns already cover: [Y/n], password:, sudo, etc.
+  # input_patterns:
+  #   - "my-custom-prompt:"
+  #   - "(?i)confirm.*:"
