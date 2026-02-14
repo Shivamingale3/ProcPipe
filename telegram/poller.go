@@ -24,7 +24,23 @@ type updateResponse struct {
 	Result []tgUpdate `json:"result"`
 }
 
+// flushPending drains all queued updates so stale messages are ignored.
+func (c *Client) flushPending() {
+	params := url.Values{"timeout": {"0"}, "offset": {strconv.FormatInt(c.offset, 10)}}
+	resp, err := c.http.Get(c.apiURL("getUpdates") + "?" + params.Encode())
+	if err != nil {
+		return
+	}
+	var result updateResponse
+	json.NewDecoder(resp.Body).Decode(&result)
+	resp.Body.Close()
+	for _, u := range result.Result {
+		c.offset = u.UpdateID + 1
+	}
+}
+
 func (c *Client) PollForReply(ctx context.Context) (string, error) {
+	c.flushPending()
 	for {
 		select {
 		case <-ctx.Done():
@@ -47,4 +63,5 @@ func (c *Client) PollForReply(ctx context.Context) (string, error) {
 		}
 	}
 }
+
 
