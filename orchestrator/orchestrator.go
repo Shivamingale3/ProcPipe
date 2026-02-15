@@ -5,11 +5,11 @@ import (
 	"strings"
 	"time"
 
-	"procpipe/config"
-	"procpipe/logger"
-	"procpipe/monitor"
-	"procpipe/notify"
-	"procpipe/process"
+	"github.com/Shivamingale3/ProcPipe/config"
+	"github.com/Shivamingale3/ProcPipe/logger"
+	"github.com/Shivamingale3/ProcPipe/monitor"
+	"github.com/Shivamingale3/ProcPipe/notify"
+	"github.com/Shivamingale3/ProcPipe/process"
 )
 
 // Run is the main entry point: spawns process, monitors, notifies.

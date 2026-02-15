@@ -132,6 +132,15 @@ make build        # Current platform only
 └── version/             # Build info
 ```
 
+## 📢 Changelog
+
+### v1.2.1 (2026-02-15)
+
+- **Uninstall Support**: Added `procpipe uninstall` and scripts.
+- **Code Quality**: Achieved **A+ (100%)** on Go Report Card.
+- **CI/CD**: Automated release pipeline via GitHub Actions.
+- **Cross-Platform**: Verified on Linux, macOS, and Windows.
+
 ## 🤝 Contributing
 
 Contributions are welcome! Whether it's reporting a bug, suggesting a feature, or writing code, I'd love to see it.

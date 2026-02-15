@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"procpipe/config"
-	"procpipe/logger"
+	"github.com/Shivamingale3/ProcPipe/config"
+	"github.com/Shivamingale3/ProcPipe/logger"
 
 	"github.com/fatih/color"
 	"github.com/spf13/cobra"

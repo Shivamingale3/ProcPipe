@@ -2,7 +2,7 @@ package telegram
 
 import (
 	"fmt"
-	"procpipe/notify"
+	"github.com/Shivamingale3/ProcPipe/notify"
 )
 
 func formatStarted(info notify.StartInfo) string {

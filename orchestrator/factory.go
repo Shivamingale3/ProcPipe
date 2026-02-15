@@ -3,9 +3,9 @@ package orchestrator
 import (
 	"os"
 
-	"procpipe/config"
-	"procpipe/notify"
-	"procpipe/telegram"
+	"github.com/Shivamingale3/ProcPipe/config"
+	"github.com/Shivamingale3/ProcPipe/notify"
+	"github.com/Shivamingale3/ProcPipe/telegram"
 )
 
 func createNotifier(cfg *config.Config) notify.Notifier {

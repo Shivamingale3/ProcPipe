@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"procpipe/config"
+	"github.com/Shivamingale3/ProcPipe/config"
 
 	"github.com/spf13/cobra"
 )

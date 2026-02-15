@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"procpipe/config"
-	"procpipe/logger"
-	"procpipe/orchestrator"
+	"github.com/Shivamingale3/ProcPipe/config"
+	"github.com/Shivamingale3/ProcPipe/logger"
+	"github.com/Shivamingale3/ProcPipe/orchestrator"
 
 	"github.com/spf13/cobra"
 )

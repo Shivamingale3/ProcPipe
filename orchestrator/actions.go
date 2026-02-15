@@ -4,10 +4,10 @@ import (
 	"context"
 	"time"
 
-	"procpipe/logger"
-	"procpipe/monitor"
-	"procpipe/notify"
-	"procpipe/process"
+	"github.com/Shivamingale3/ProcPipe/logger"
+	"github.com/Shivamingale3/ProcPipe/monitor"
+	"github.com/Shivamingale3/ProcPipe/notify"
+	"github.com/Shivamingale3/ProcPipe/process"
 )
 
 func handleInput(ctx context.Context, mon *monitor.Monitor, proc *process.Process, n notify.Notifier, cmd, prompt string) {

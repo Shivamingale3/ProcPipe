@@ -4,7 +4,7 @@ import (
 	"os"
 	"os/exec"
 
-	"procpipe/logger"
+	"github.com/Shivamingale3/ProcPipe/logger"
 )
 
 func installUnix(self string) {

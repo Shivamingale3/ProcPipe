@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"runtime"
 
-	"procpipe/version"
+	"github.com/Shivamingale3/ProcPipe/version"
 
 	"github.com/spf13/cobra"
 )

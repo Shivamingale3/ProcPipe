@@ -1,4 +1,4 @@
-module procpipe
+module github.com/Shivamingale3/ProcPipe
 
 go 1.25.6
 

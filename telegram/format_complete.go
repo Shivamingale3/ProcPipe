@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"procpipe/notify"
+	"github.com/Shivamingale3/ProcPipe/notify"
 )
 
 func formatCompleted(info notify.CompleteInfo) string {

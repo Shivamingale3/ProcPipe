@@ -2,7 +2,7 @@ package telegram
 
 import (
 	"context"
-	"procpipe/notify"
+	"github.com/Shivamingale3/ProcPipe/notify"
 )
 
 // Notifier implements notify.Notifier using the Telegram Bot API.

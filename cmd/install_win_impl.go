@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"path/filepath"
 
-	"procpipe/logger"
+	"github.com/Shivamingale3/ProcPipe/logger"
 )
 
 func installWindows(self string) {

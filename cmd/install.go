@@ -6,7 +6,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"procpipe/logger"
+	"github.com/Shivamingale3/ProcPipe/logger"
 
 	"github.com/spf13/cobra"
 )

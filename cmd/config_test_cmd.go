@@ -1,9 +1,9 @@
 package cmd
 
 import (
-	"procpipe/config"
-	"procpipe/logger"
-	"procpipe/telegram"
+	"github.com/Shivamingale3/ProcPipe/config"
+	"github.com/Shivamingale3/ProcPipe/logger"
+	"github.com/Shivamingale3/ProcPipe/telegram"
 
 	"github.com/spf13/cobra"
 )

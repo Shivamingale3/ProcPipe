@@ -3,7 +3,7 @@ DIST     := dist
 VERSION  := $(shell scripts/version.sh)
 COMMIT   := $(shell git rev-parse --short HEAD 2>/dev/null || echo "none")
 DATE     := $(shell date -u +%Y-%m-%dT%H:%M:%S)
-LDFLAGS  := -ldflags="-s -w -X procpipe/version.Version=$(VERSION) -X procpipe/version.Commit=$(COMMIT) -X procpipe/version.BuildDate=$(DATE)"
+LDFLAGS  := -ldflags="-s -w -X github.com/Shivamingale3/ProcPipe/version.Version=$(VERSION) -X github.com/Shivamingale3/ProcPipe/version.Commit=$(COMMIT) -X github.com/Shivamingale3/ProcPipe/version.BuildDate=$(DATE)"
 
 .PHONY: build build-all clean install
 
