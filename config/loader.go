@@ -3,16 +3,14 @@ package config
 import (
 	"fmt"
 	"os"
-	"path/filepath"
 
 	"gopkg.in/yaml.v3"
 )
 
-// Load reads config from YAML, overlays CLI flags, and validates.
 func Load(flags *Flags) (*Config, error) {
 	cfg := DefaultConfig()
 
-	path := resolveConfigPath(flags.ConfigFile)
+	path := ConfigPath(flags.ConfigFile)
 	if data, err := os.ReadFile(path); err == nil {
 		if err := yaml.Unmarshal(data, cfg); err != nil {
 			return nil, fmt.Errorf("parsing config %s: %w", path, err)
@@ -23,15 +21,15 @@ func Load(flags *Flags) (*Config, error) {
 	return cfg, validate(cfg)
 }
 
-func resolveConfigPath(custom string) string {
-	if custom != "" {
-		return custom
+func LoadPartial() (*Config, error) {
+	cfg := DefaultConfig()
+	path := ConfigPath("")
+	if data, err := os.ReadFile(path); err == nil {
+		if err := yaml.Unmarshal(data, cfg); err != nil {
+			return nil, fmt.Errorf("parsing config %s: %w", path, err)
+		}
 	}
-	if _, err := os.Stat("procpipe.yaml"); err == nil {
-		return "procpipe.yaml"
-	}
-	home, _ := os.UserHomeDir()
-	return filepath.Join(home, ".procpipe.yaml")
+	return cfg, validatePartial(cfg)
 }
 
 func applyFlags(cfg *Config, f *Flags) {
@@ -44,3 +42,4 @@ func applyFlags(cfg *Config, f *Flags) {
 	cfg.DryRun = f.DryRun
 	cfg.Command = f.Command
 }
+

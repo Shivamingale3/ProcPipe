@@ -7,24 +7,7 @@ import (
 	"strconv"
 )
 
-type tgUpdate struct {
-	UpdateID int64      `json:"update_id"`
-	Message  *tgMessage `json:"message"`
-}
-
-type tgMessage struct {
-	Text string `json:"text"`
-	Chat struct {
-		ID int64 `json:"id"`
-	} `json:"chat"`
-}
-
-type updateResponse struct {
-	OK     bool       `json:"ok"`
-	Result []tgUpdate `json:"result"`
-}
-
-// flushPending drains all queued updates so stale messages are ignored.
+// flushPending drains queued updates.
 func (c *Client) flushPending() {
 	params := url.Values{"timeout": {"0"}, "offset": {strconv.FormatInt(c.offset, 10)}}
 	resp, err := c.http.Get(c.apiURL("getUpdates") + "?" + params.Encode())
@@ -63,5 +46,3 @@ func (c *Client) PollForReply(ctx context.Context) (string, error) {
 		}
 	}
 }
-
-

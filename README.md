@@ -11,80 +11,60 @@ Spawn any long-running command — builds, updates, deployments — and walk awa
 - ⚠️ **Input detection** — detects prompts like `[Y/n]`, `password:`, forwards your reply
 - 🪶 **Zero polling** — uses blocking I/O, sleeps until something happens
 - 📦 **Single binary** — static executable, no dependencies, cross-platform
+- 🔧 **Interactive Setup** — built-in config wizard
+
+## Installation
+
+### Automated Install (Linux/macOS)
+
+```bash
+# If you have the install script locally:
+./install.sh
+```
+
+### Manual Install
+
+1. Download the binary for your OS
+2. Add to your system PATH
+3. Run `procpipe version` to verify
 
 ## Quick Start
 
+### 1. Setup
+
+Run the interactive wizard to set up your Telegram bot:
+
 ```bash
-# Build
-make build
+procpipe config
+```
+
+This will guide you through creating a bot and verifying the connection.
+
+### 2. Run Commands
+
+Prefix any command with `procpipe`:
+
+```bash
+# Basic usage (defaults to 'run')
+procpipe -- sudo apt update
+
+# Explicit run command
+procpipe run -- make build
 
 # Test locally (no Telegram needed)
-./dist/procpipe --dry-run -- echo "hello world"
-
-# With Telegram
-./dist/procpipe --token "YOUR_BOT_TOKEN" --chat 123456789 -- apt update && apt upgrade
+procpipe run --dry-run -- echo "hello world"
 ```
 
-## Setup Telegram Credentials
-
-### Step 1: Create a Bot
-
-1. Open Telegram and search for **@BotFather**
-2. Send `/newbot`
-3. Choose a name (e.g., "ProcPipe Bot")
-4. Choose a username (e.g., "my_procpipe_bot")
-5. BotFather will give you a **Bot Token** like: `7123456789:AAF1k2j3h4g5f6d7s8a9`
-6. Save this token
-
-### Step 2: Get Your Chat ID
-
-1. Search for **@userinfobot** on Telegram
-2. Send it any message
-3. It will reply with your **Chat ID** (a number like `987654321`)
-4. Save this number
-
-### Step 3: Start Your Bot
-
-1. Search for your bot by its username on Telegram
-2. Press **Start** — this is required before the bot can send you messages
-
-### Step 4: Configure ProcPipe
-
-Create `~/.procpipe.yaml`:
-
-```yaml
-telegram:
-  bot_token: "7123456789:AAF1k2j3h4g5f6d7s8a9"
-  chat_id: 987654321
-
-monitor:
-  log_tail_lines: 50
-```
-
-Or use CLI flags:
+## CLI Reference
 
 ```bash
-./dist/procpipe --token "TOKEN" --chat 123456 -- your-command
-```
-
-## Usage
-
-```bash
-# Basic usage
-procpipe [flags] -- <command> [args...]
-
-# Flags
---token     Telegram bot token (overrides config)
---chat      Telegram chat ID (overrides config)
---config    Path to config file (default: ~/.procpipe.yaml)
---dry-run   Print notifications to stdout instead of Telegram
-
-# Examples
-procpipe -- make build
-procpipe -- npm run build
-procpipe -- sudo apt update && sudo apt upgrade
-procpipe -- docker build -t myapp .
-procpipe --dry-run -- sleep 5
+procpipe run -- <cmd>      # Run command (default)
+procpipe config            # Interactive config wizard
+procpipe config show       # Show current config
+procpipe config test       # Test Telegram connection
+procpipe config path       # Print config file location
+procpipe install           # Install to system PATH
+procpipe version           # Show version info
 ```
 
 ## How Detection Works
@@ -107,15 +87,6 @@ Automatically detected prompts:
 - `Press Enter`, `Type X to confirm`
 - `[sudo] password`, `Do you want to`, `Are you sure`
 
-Add custom patterns in config:
-
-```yaml
-monitor:
-  input_patterns:
-    - "my custom prompt:"
-    - "(?i)confirm.*:"
-```
-
 ## Cross-Platform Builds
 
 ```bash
@@ -126,14 +97,13 @@ make build        # Current platform only
 ## Project Structure
 
 ```
-├── main.go              # Entry point
-├── config/              # YAML config + CLI flags + validation
-├── process/             # PTY process spawner + lifecycle
-├── monitor/             # Output reader + ring buffer + pattern matcher
-├── notify/              # Notifier interface + dry-run implementation
-├── telegram/            # Telegram Bot API client + formatters
-├── orchestrator/        # Main event loop + handlers
-├── logger/              # Colored terminal logger
-├── Makefile             # Build targets
-└── procpipe.example.yaml # Example config
+├── cmd/                 # Cobra subcommands (run, config, install, etc.)
+├── config/              # YAML config + loader
+├── process/             # PTY process spawner
+├── monitor/             # Output reader + pattern matcher
+├── notify/              # Notifier interface
+├── telegram/            # Telegram client + poller
+├── orchestrator/        # Main event loop
+├── logger/              # Terminal logger
+└── version/             # Build info
 ```
