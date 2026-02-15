@@ -8,7 +8,9 @@ import (
 
 	"github.com/fatih/color"
 )
+
 type DryRun struct{}
+
 func NewDryRun() *DryRun { return &DryRun{} }
 func (d *DryRun) SendStarted(info StartInfo) error {
 	color.Green("🚀 Process Started: %s", info.Command)

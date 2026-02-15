@@ -46,6 +46,3 @@ func runCommand(_ *cobra.Command, args []string) {
 		logger.Error("Exit: %d", code)
 	}
 }
-
-
-

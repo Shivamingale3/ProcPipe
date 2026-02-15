@@ -26,4 +26,3 @@ func validatePartial(cfg *Config) error {
 	}
 	return nil
 }
-

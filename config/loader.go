@@ -42,4 +42,3 @@ func applyFlags(cfg *Config, f *Flags) {
 	cfg.DryRun = f.DryRun
 	cfg.Command = f.Command
 }
-
