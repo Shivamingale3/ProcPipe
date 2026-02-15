@@ -2,6 +2,10 @@
 
 ![ProcPipe Banner](version/banner.png)
 
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Go Report Card](https://goreportcard.com/badge/github.com/Shivamingale3/ProcPipe)](https://goreportcard.com/report/github.com/Shivamingale3/ProcPipe)
+[![GitHub Release](https://img.shields.io/github/v/release/Shivamingale3/ProcPipe)](https://github.com/Shivamingale3/ProcPipe/releases)
+
 **Terminal process watcher with Telegram notifications.**
 
 Spawn any long-running command — builds, updates, deployments — and walk away. ProcPipe watches it with near-zero resource usage and messages you on Telegram when it completes (with logs) or when it needs input.
@@ -127,3 +131,24 @@ make build        # Current platform only
 ├── logger/              # Terminal logger
 └── version/             # Build info
 ```
+
+## 🤝 Contributing
+
+Contributions are welcome! Whether it's reporting a bug, suggesting a feature, or writing code, I'd love to see it.
+
+1.  **Fork** the repository
+2.  Create your feature branch (`git checkout -b feature/amazing-feature`)
+3.  Commit your changes (`git commit -m 'Add some amazing feature'`)
+4.  Push to the branch (`git push origin feature/amazing-feature`)
+5.  Open a **Pull Request**
+
+## 📄 License
+
+Distributed under the MIT License. See `LICENSE` for more information.
+
+## 💖 Support
+
+If ProcPipe saves you time, please consider supporting the project:
+
+- ⭐ **Star** on [GitHub](https://github.com/Shivamingale3/ProcPipe)
+- 🐛 **Report** issues / **Fork** and contribute
