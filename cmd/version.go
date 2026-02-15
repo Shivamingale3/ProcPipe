@@ -18,6 +18,10 @@ var versionCmd = &cobra.Command{
 		fmt.Printf("Built:   %s\n", version.BuildDate)
 		fmt.Printf("OS/Arch: %s/%s\n", runtime.GOOS, runtime.GOARCH)
 		fmt.Printf("Go:      %s\n", runtime.Version())
+		fmt.Printf("Developer:      %s\n", version.Developer)
+		fmt.Printf("Email:      %s\n", version.Email)
+		fmt.Printf("Github:      %s\n", version.Github)
+		fmt.Printf("Website:      %s\n", version.Website)
 	},
 }
 
