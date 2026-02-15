@@ -17,18 +17,35 @@ Spawn any long-running command — builds, updates, deployments — and walk awa
 
 ## Installation
 
-### Automated Install (Linux/macOS)
+## Installation
+
+### Linux / macOS
+
+Run this one-line command to download and install automatically:
 
 ```bash
-# If you have the install script locally:
-./install.sh
+curl -sL https://raw.githubusercontent.com/Shivamingale3/ProcPipe/main/install.sh | bash
+```
+
+### Windows (PowerShell)
+
+```powershell
+iwr -useb https://raw.githubusercontent.com/Shivamingale3/ProcPipe/main/install.ps1 | iex
 ```
 
 ### Manual Install
 
-1. Download the binary for your OS
-2. Add to your system PATH
-3. Run `procpipe version` to verify
+1. Go to [Releases](https://github.com/Shivamingale3/ProcPipe/releases)
+2. Download the binary for your OS
+3. Run: `./procpipe install`
+
+### Uninstall
+
+```bash
+procpipe uninstall
+# OR
+./uninstall.sh
+```
 
 ## Quick Start
 
@@ -66,6 +83,7 @@ procpipe config show       # Show current config
 procpipe config test       # Test Telegram connection
 procpipe config path       # Print config file location
 procpipe install           # Install to system PATH
+procpipe uninstall         # Remove from system PATH
 procpipe version           # Show version info
 ```
 

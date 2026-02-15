@@ -13,20 +13,14 @@ case "$ARCH" in
 esac
 
 BINARY="procpipe-${OS}-${ARCH}"
-URL="https://github.com/yourusername/procpipe/releases/latest/download/$BINARY"
+URL="https://github.com/Shivamingale3/ProcPipe/releases/latest/download/$BINARY"
 DEST="/usr/local/bin/procpipe"
 
 echo "Downloading ProcPipe for $OS/$ARCH..."
-# In real distribution, download from github releases
-# curl -L -o procpipe $URL
-
-# For now, assume building from source or using dist folder if present
-if [ -f "dist/$BINARY" ]; then
-    cp "dist/$BINARY" procpipe
-elif [ -f "dist/procpipe" ]; then
-    cp "dist/procpipe" procpipe
+if curl --fail --silent --show-error -L -o procpipe "$URL"; then
+    chmod +x procpipe
 else
-    echo "Building from source..."
+    echo "Download failed. Building from source..."
     make build
     cp "dist/procpipe" procpipe
 fi
