@@ -1,6 +1,6 @@
 APP      := procpipe
 DIST     := dist
-VERSION  := $(shell git describe --tags --always --dirty 2>/dev/null || echo "dev")
+VERSION  := $(shell scripts/version.sh)
 COMMIT   := $(shell git rev-parse --short HEAD 2>/dev/null || echo "none")
 DATE     := $(shell date -u +%Y-%m-%dT%H:%M:%S)
 LDFLAGS  := -ldflags="-s -w -X procpipe/version.Version=$(VERSION) -X procpipe/version.Commit=$(COMMIT) -X procpipe/version.BuildDate=$(DATE)"
