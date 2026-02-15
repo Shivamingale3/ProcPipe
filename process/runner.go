@@ -3,6 +3,7 @@ package process
 import (
 	"fmt"
 	"os/exec"
+	"strings"
 
 	"github.com/creack/pty"
 )
@@ -11,6 +12,10 @@ import (
 func Start(command []string) (*Process, error) {
 	if len(command) == 0 {
 		return nil, fmt.Errorf("empty command")
+	}
+
+	if len(command) == 1 && strings.ContainsAny(command[0], "&|;<>") {
+		command = []string{"/bin/sh", "-c", command[0]}
 	}
 
 	cmd := exec.Command(command[0], command[1:]...)

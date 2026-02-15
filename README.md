@@ -1,5 +1,7 @@
 # ProcPipe 🔭
 
+![ProcPipe Banner](version/banner.png)
+
 **Terminal process watcher with Telegram notifications.**
 
 Spawn any long-running command — builds, updates, deployments — and walk away. ProcPipe watches it with near-zero resource usage and messages you on Telegram when it completes (with logs) or when it needs input.
