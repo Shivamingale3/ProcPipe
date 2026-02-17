@@ -19,117 +19,196 @@ Spawn any long-running command — builds, updates, deployments — and walk awa
 - 📦 **Single binary** — static executable, no dependencies, cross-platform
 - 🔧 **Interactive Setup** — built-in config wizard
 
-## Installation
+---
 
-## Installation
+## 📥 Installation
+
+Choose the method that works best for your operating system.
 
 ### Linux / macOS
 
-Run this one-line command to download and install automatically:
+**Automatic Install** (Recommended):
+Run this one-line command to download the latest binary and install it to `/usr/local/bin`:
 
 ```bash
 curl -sL https://raw.githubusercontent.com/Shivamingale3/ProcPipe/main/install.sh | bash
 ```
 
-### Windows (PowerShell)
+**Go Install**:
+If you have Go installed, you can build directly from source:
+
+```bash
+go install github.com/Shivamingale3/ProcPipe@latest
+```
+
+### Windows
+
+**PowerShell** (Recommended):
+Run this command in PowerShell to download and install:
 
 ```powershell
 iwr -useb https://raw.githubusercontent.com/Shivamingale3/ProcPipe/main/install.ps1 | iex
 ```
 
-### Manual Install
+**Manual Install**:
 
-1. Go to [Releases](https://github.com/Shivamingale3/ProcPipe/releases)
-2. Download the binary for your OS
-3. Run: `./procpipe install`
+1. Go to [Releases](https://github.com/Shivamingale3/ProcPipe/releases).
+2. Download the `procpipe-windows-amd64.exe` binary.
+3. Rename it to `procpipe.exe` and place it in a folder in your `PATH`.
+4. Run `procpipe install` to verify.
 
 ### Uninstall
 
+To remove ProcPipe from your system:
+
 ```bash
+# Linux/macOS
 procpipe uninstall
 # OR
 ./uninstall.sh
+
+# Windows
+procpipe uninstall
 ```
 
-## Quick Start
+---
 
-### 1. Setup
+## 🤖 Telegram Bot Setup
 
-Run the interactive wizard to set up your Telegram bot:
+To receive notifications, you need to create a Telegram bot and get your Chat ID.
+
+### 1. Create a Bot
+
+1. Open Telegram and search for **[@BotFather](https://t.me/BotFather)**.
+2. Send the command `/newbot`.
+3. Follow the instructions to name your bot (e.g., `MyProcPipeBot`).
+4. **Copy the HTTP API Token** provided (it looks like `123456:ABC-DEF1234gh...`).
+
+### 2. Get Your Chat ID
+
+1. Search for **[@userinfobot](https://t.me/userinfobot)** on Telegram.
+2. Send any message (like `/start`).
+3. It will reply with your `Id` (e.g., `987654321`). **Copy this number**.
+
+### 3. Configure ProcPipe
+
+Run the interactive configuration wizard:
 
 ```bash
 procpipe config
 ```
 
-This will guide you through creating a bot and verifying the connection.
+- Paste your **Bot Token**.
+- Paste your **Chat ID**.
+- The tool will send a test message to verify the connection.
 
-### 2. Run Commands
+> **Note:** Configuration is saved to `~/.config/procpipe/config.yaml` (or equivalent on Windows). You can view the file path with `procpipe config path`.
 
-Prefix any command with `procpipe`:
+---
+
+## 🚀 Usage
+
+The basic syntax is `procpipe run -- <command>`. The `--` separator is required to distinguish ProcPipe flags from your command's flags.
+
+### Basic Examples
+
+**Run a simple command:**
 
 ```bash
-# Basic usage (defaults to 'run')
-procpipe -- sudo apt update
+procpipe run -- sudo apt update
+```
 
-# Explicit run command
+**Run a build process:**
+
+```bash
 procpipe run -- make build
+```
 
-# Test locally (no Telegram needed)
+**Run a command with arguments:**
+
+```bash
+procpipe run -- python3 script.py --verbose --input file.txt
+```
+
+**Run chained commands:**
+To run complex pipelines or chained commands, wrap them in quotes:
+
+```bash
+procpipe run -- "npm install && npm run build"
+```
+
+### Options
+
+**Dry Run (Test without Telegram):**
+Use `--dry-run` or just run without configuring Telegram to see output in the terminal only.
+
+```bash
 procpipe run --dry-run -- echo "hello world"
 ```
 
-## CLI Reference
+**Specify a different config file:**
 
 ```bash
-procpipe run -- <cmd>      # Run command (default)
-procpipe config            # Interactive config wizard
-procpipe config show       # Show current config
-procpipe config test       # Test Telegram connection
-procpipe config path       # Print config file location
-procpipe install           # Install to system PATH
-procpipe uninstall         # Remove from system PATH
-procpipe version           # Show version info
+procpipe run --config ./alternate-config.yaml -- ./deploy.sh
 ```
 
-## How Detection Works
+---
 
-| What                   | How                                    | CPU Cost            |
-| ---------------------- | -------------------------------------- | ------------------- |
-| **Process completion** | PTY read returns EOF → check exit code | Zero (blocks on fd) |
-| **Input prompts**      | Regex matching on each output chunk    | Negligible          |
-| **Telegram replies**   | Long polling with 60s server timeout   | Zero (HTTP blocks)  |
+## ⚙️ Configuration Reference
 
-**No timers, no polling loops.** The app sleeps between events.
+You can manage configuration via the CLI or by editing the config file directly.
 
-### Built-in Input Patterns
+**CLI Commands:**
 
-Automatically detected prompts:
+```bash
+procpipe config            # Start interactive wizard
+procpipe config show       # Show current valid configuration
+procpipe config path       # Print path to config file
+procpipe config test       # Send a test message to defined Telegram chat
+```
 
-- `[Y/n]`, `[yes/no]`, `(y/n)`
+**Config File Structure:**
+
+```yaml
+telegram:
+  bot_token: "123456:ABC-DEF..."
+  chat_id: 987654321
+monitor:
+  log_tail_lines: 20
+  input_patterns: []
+```
+
+---
+
+## 🔍 How Detection Works
+
+| Feature                | Mechanism                               | CPU Usage                        |
+| :--------------------- | :-------------------------------------- | :------------------------------- |
+| **Process completion** | PTY read returns EOF -> check exit code | Zero (blocks on file descriptor) |
+| **Input prompts**      | Regex matching on each output chunk     | Negligible                       |
+| **Telegram replies**   | Long polling with 60s server timeout    | Zero (HTTP blocks)               |
+
+**Input Patterns**:
+ProcPipe automatically detects common prompts like:
+
+- `[Y/n]`, `[yes/no]`
 - `password:`, `passphrase:`
-- `Enter ...:`, `Continue?`
-- `Press Enter`, `Type X to confirm`
-- `[sudo] password`, `Do you want to`, `Are you sure`
+- `Press Enter to continue`
 
-## Cross-Platform Builds
+---
 
-```bash
-make build-all    # Linux, macOS, Windows (amd64 + arm64)
-make build        # Current platform only
-```
-
-## Project Structure
+## 🛠 Project Structure
 
 ```
-├── cmd/                 # Cobra subcommands (run, config, install, etc.)
-├── config/              # YAML config + loader
-├── process/             # PTY process spawner
-├── monitor/             # Output reader + pattern matcher
-├── notify/              # Notifier interface
-├── telegram/            # Telegram client + poller
-├── orchestrator/        # Main event loop
-├── logger/              # Terminal logger
-└── version/             # Build info
+├── cmd/                 # Cobra commands (run, config, install)
+├── config/              # Configuration loading & validation logic
+├── process/             # Low-level PTY process spawning
+├── monitor/             # Output monitoring & pattern matching
+├── notify/              # Notification system interfaces
+├── telegram/            # Telegram API client & long-polling
+├── orchestrator/        # Main logic connecting process <-> telegram
+├── logger/              # Terminal logging utilities
+└── version/             # Versioning info
 ```
 
 ## 📢 Changelog
@@ -143,13 +222,13 @@ make build        # Current platform only
 
 ## 🤝 Contributing
 
-Contributions are welcome! Whether it's reporting a bug, suggesting a feature, or writing code, I'd love to see it.
+Contributions are welcome!
 
-1.  **Fork** the repository
-2.  Create your feature branch (`git checkout -b feature/amazing-feature`)
-3.  Commit your changes (`git commit -m 'Add some amazing feature'`)
-4.  Push to the branch (`git push origin feature/amazing-feature`)
-5.  Open a **Pull Request**
+1. Fork the Project
+2. Create your Feature Branch
+3. Commit your Changes
+4. Push to the Branch
+5. Open a Pull Request
 
 ## 📄 License
 
@@ -157,7 +236,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## 💖 Support
 
-If ProcPipe saves you time, please consider supporting the project:
+If ProcPipe saves you time, please consider:
 
-- ⭐ **Star** on [GitHub](https://github.com/Shivamingale3/ProcPipe)
-- 🐛 **Report** issues / **Fork** and contribute
+- ⭐ Staring the repo on [GitHub](https://github.com/Shivamingale3/ProcPipe)
+- 🐛 Reporting issues
