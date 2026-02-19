@@ -24,3 +24,7 @@ procpipe.yaml
 # OS
 .DS_Store
 Thumbs.db
+
+# NPM
+npm/bin/procpipe*
+npm/node_modules/

@@ -1,0 +1,50 @@
+{
+  "name": "procpipe",
+  "version": "1.2.3",
+  "description": "Terminal process watcher with Telegram notifications. Spawn any long-running command and walk away — ProcPipe watches it and messages you when it completes or needs input.",
+  "keywords": [
+    "process",
+    "monitor",
+    "watcher",
+    "telegram",
+    "notifications",
+    "cli",
+    "terminal",
+    "pty",
+    "devops"
+  ],
+  "homepage": "https://github.com/Shivamingale3/ProcPipe",
+  "bugs": {
+    "url": "https://github.com/Shivamingale3/ProcPipe/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shivamingale3/ProcPipe.git"
+  },
+  "license": "MIT",
+  "author": "Shivamingale3",
+  "bin": {
+    "procpipe": "run.js"
+  },
+  "scripts": {
+    "postinstall": "node install.js"
+  },
+  "files": [
+    "install.js",
+    "run.js",
+    "bin/",
+    "README.md"
+  ],
+  "os": [
+    "linux",
+    "darwin",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ],
+  "engines": {
+    "node": ">=14"
+  }
+}
