@@ -213,12 +213,25 @@ ProcPipe automatically detects common prompts like:
 
 ## 📢 Changelog
 
+### v1.3.0 (2026-02-19)
+
+- **Dual Input Racing**: Terminal stdin and Telegram replies race simultaneously — first response wins.
+- **Dry-Run Input Support**: Input prompts now work in `--dry-run` mode via terminal-only input.
+- **Log Ordering Fix**: "Waiting for input" log now always prints before input goroutines start.
+- **Refactor**: Extracted stdin reading logic into `orchestrator/stdin.go`.
+
+### v1.2.2 (2026-02-18)
+
+- **Module Rename**: Renamed module to `github.com/Shivamingale3/ProcPipe`.
+
 ### v1.2.1 (2026-02-15)
 
 - **Uninstall Support**: Added `procpipe uninstall` and scripts.
 - **Code Quality**: Achieved **A+ (100%)** on Go Report Card.
 - **CI/CD**: Automated release pipeline via GitHub Actions.
 - **Cross-Platform**: Verified on Linux, macOS, and Windows.
+
+> See [CHANGELOG.md](CHANGELOG.md) for the full version history.
 
 ## 🤝 Contributing
 
