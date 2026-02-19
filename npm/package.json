@@ -1,6 +1,6 @@
 {
   "name": "procpipe",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "Terminal process watcher with Telegram notifications. Spawn any long-running command and walk away — ProcPipe watches it and messages you when it completes or needs input.",
   "keywords": [
     "process",
