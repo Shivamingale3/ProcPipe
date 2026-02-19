@@ -9,6 +9,15 @@ const fs = require("fs");
 const args = process.argv.slice(2);
 const subcommand = args[0];
 
+if (subcommand === "uninstall") {
+  console.log("To uninstall ProcPipe from an npm installation, run:");
+  console.log("  npm uninstall procpipe");
+  console.log("");
+  console.log("If you installed it globally, run:");
+  console.log("  npm uninstall -g procpipe");
+  process.exit(0);
+}
+
 const ext = process.platform === "win32" ? ".exe" : "";
 const binaryPath = path.join(__dirname, "bin", `procpipe${ext}`);
 
