@@ -45,8 +45,5 @@
   ],
   "engines": {
     "node": ">=14"
-  },
-  "dependencies": {
-    "procpipe": "^1.2.5"
   }
 }
