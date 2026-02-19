@@ -40,6 +40,7 @@ func uninstallUnix() {
 		return
 	}
 	logger.Success("Uninstalled successfully.")
+	logger.Info("Run 'hash -r' or open a new terminal to clear the shell cache.")
 }
 
 func uninstallWindows() {

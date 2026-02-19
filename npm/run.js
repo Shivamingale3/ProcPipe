@@ -17,7 +17,7 @@ const NPM_INTERCEPTED = {
   },
   uninstall: {
     message: "ProcPipe was installed via npm. Use npm to uninstall:",
-    hint: "npm uninstall -g procpipe",
+    hint: "npm uninstall -g procpipe\n\n  Then run 'hash -r' or open a new terminal to clear the shell cache.",
   },
 };
 
