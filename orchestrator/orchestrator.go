@@ -39,5 +39,5 @@ func Run(cfg *config.Config) (int, error) {
 	mon := monitor.New(proc.Output(), cfg.Monitor.LogTailLines, cfg.Monitor.InputPatterns)
 	mon.Start()
 
-	return handleEvents(mon, proc, n, cmdStr, host, startTime), nil
+	return handleEvents(mon, proc, n, cmdStr, host, startTime, cfg.DryRun), nil
 }
