@@ -5,6 +5,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Go Report Card](https://goreportcard.com/badge/github.com/Shivamingale3/ProcPipe)](https://goreportcard.com/report/github.com/Shivamingale3/ProcPipe)
 [![GitHub Release](https://img.shields.io/github/v/release/Shivamingale3/ProcPipe)](https://github.com/Shivamingale3/ProcPipe/releases)
+[![Hits]](https://hits.sh/github.com/shivamingale3/ProcPipe.svg)
 
 **Terminal process watcher with Telegram notifications.**
 
